@@ -15,7 +15,7 @@ public class IntegrationEvent
     [JsonProperty]
     public DateTime CreatedDate { get; private set; }
 
-    [JsonConstructor]
+    
     public IntegrationEvent()
     {
         Id = Guid.NewGuid();
@@ -23,9 +23,9 @@ public class IntegrationEvent
     }
 
     [JsonConstructor]
-    public IntegrationEvent(Guid ıd, DateTime createdDate)
+    public IntegrationEvent(Guid id, DateTime createdDate)
     {
-        Id = ıd;
+        Id = id;
         CreatedDate = createdDate;
     }
 }
