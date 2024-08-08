@@ -21,5 +21,4 @@ public interface IEventBusSubscriptionManager
     IEnumerable<SubscriptionInfo> GetHandlersForEvent<T>() where T : IntegrationEvent;
     IEnumerable<SubscriptionInfo> GetHandlersForEvent(string eventName);
     string GetEventKey<T>();
-
 }

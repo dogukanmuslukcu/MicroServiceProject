@@ -12,7 +12,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace EventBus.AzureServiceBus;
-
+// Implements an EventBus using Azure Service Bus.
+// Manages event publishing and subscription for the Service Bus, including topic and subscription management.
 public class EventBusServiceBus : BaseEventBus
 {
     private ITopicClient topicClient;
@@ -25,7 +26,6 @@ public class EventBusServiceBus : BaseEventBus
         topicClient = CreateTopicClient();
         logger = (ILogger<EventBusServiceBus>)serviceProvider.GetService(typeof(ILogger<EventBusServiceBus>));
     }
-
     private ITopicClient CreateTopicClient()
     {
         if (topicClient == null || topicClient.IsClosedOrClosing)

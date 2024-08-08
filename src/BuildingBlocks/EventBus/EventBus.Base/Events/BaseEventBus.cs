@@ -8,6 +8,8 @@ using Newtonsoft.Json;
 
 namespace SellingBuddy.EventBus.Base.Events;
 
+// Provides a base class for all EventBus implementations.
+// Defines core operations for managing events in the Event Bus system.
 public abstract class BaseEventBus : IEventBus
 {
     public readonly IServiceProvider ServiceProvider;
@@ -21,7 +23,6 @@ public abstract class BaseEventBus : IEventBus
         ServiceProvider = serviceProvider;
         SubscriptionManager = new InMemoryEventBusSubscriptionManager(ProcessEventName);
     }
-
     public virtual string ProcessEventName(string eventName)
     {
         if (EventBusConfig.DeleteEventPrefix)
@@ -32,18 +33,15 @@ public abstract class BaseEventBus : IEventBus
 
         return eventName;
     }
-
     public virtual string GetSubName(string eventName)
     {
         return $"{EventBusConfig.SubscriberClientAppName}.{ProcessEventName(eventName)}";
     }
-
     public virtual void Dispose()
     {
         EventBusConfig = null;
         SubscriptionManager.Clear();
     }
-
     public async Task<bool> ProcessEvent(string eventName, string message)
     {
         eventName = ProcessEventName(eventName);
@@ -74,10 +72,7 @@ public abstract class BaseEventBus : IEventBus
 
         return processed;
     }
-
     public abstract void Publish(IntegrationEvent @event);
-
     public abstract void Subscribe<T, TH>() where T : IntegrationEvent where TH : IIntegrationEventHandler<T>;
-
     public abstract void UnSubscribe<T, TH>() where T : IntegrationEvent where TH : IIntegrationEventHandler<T>;
 }

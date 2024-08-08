@@ -15,13 +15,11 @@ public class IntegrationEvent
     [JsonProperty]
     public DateTime CreatedDate { get; private set; }
 
-    
     public IntegrationEvent()
     {
         Id = Guid.NewGuid();
         CreatedDate = DateTime.UtcNow;
     }
-
     [JsonConstructor]
     public IntegrationEvent(Guid id, DateTime createdDate)
     {
